@@ -114,14 +114,15 @@ class ChakraPosterGenerator {
 
     ctx.fillStyle = "#2D2621";
     ctx.font = "500 16px -apple-system, sans-serif";
-    const rxSummary = `${lowest.frequency.split(' ')[0]} 音频共振 · ${lowest.crystal.split(' ')[0]} · ${lowest.affirmation}`;
+    const freqNumber = lowest.frequency.split(' ')[0].replace(/[^0-9]/g, '');
+    const rxSummary = `${freqNumber}Hz 频率共振 · ${lowest.crystal.split(' ')[0]} · ${lowest.affirmation}`;
     this.wrapText(ctx, rxSummary, 215, 868, 440, 24, 2);
 
-    // 7. 底部小红书专属打卡水印
+    // 7. 底部小红书专属打卡水印 (卡卡罗特)
     ctx.textAlign = "center";
     ctx.fillStyle = "#9C9182";
     ctx.font = "500 14px -apple-system, sans-serif";
-    ctx.fillText("小红书 @内在脉轮探索 · 长按保存测测你的脉轮", w / 2, 946);
+    ctx.fillText("小红书 @卡卡罗特 · 长按保存测测你的脉轮", w / 2, 946);
 
     return this.canvas.toDataURL("image/png");
   }
