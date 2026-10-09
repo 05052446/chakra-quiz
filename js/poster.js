@@ -1,131 +1,138 @@
 /**
- * 小红书高颜值竖版打卡海报生成器 (Canvas Retina 渲染)
- * 适配小红书竖版长图比例 (750 x 1280 px)
+ * 小红书高视觉冲击力 · 杂志级大片排版海报生成器 (Canvas Retina 渲染)
+ * 设计规范：大字号、突出视觉中心雷达图、精炼痛点标签、去除冗长文字、杂志封面感
  */
 
 class ChakraPosterGenerator {
   constructor() {
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
-    // 高清 Retina 2x 分辨率
+    // 小红书官方标准黄金竖版 3:4 比例 (750 x 1000 px)
     this.width = 750;
-    this.height = 1280;
+    this.height = 1000;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
   }
 
   /**
-   * 生成海报数据 URL
-   * @param {Object} data 包含 persona, chakraScores, radarChartBase64
+   * 生成极简吸睛大片海报
    */
   async generatePoster(data) {
     const ctx = this.ctx;
     const w = this.width;
     const h = this.height;
 
-    // 1. 绘制侘寂奶油温润背景
-    ctx.fillStyle = "#F8F5EE";
+    // 1. 侘寂奶油质感背景 + 层次光影
+    ctx.fillStyle = "#F6F2EA";
     ctx.fillRect(0, 0, w, h);
 
-    // 绘制柔和渐变微光斑
-    const radialBg = ctx.createRadialGradient(w * 0.2, h * 0.15, 20, w * 0.2, h * 0.15, 380);
-    radialBg.addColorStop(0, "rgba(222, 175, 86, 0.12)");
-    radialBg.addColorStop(1, "rgba(248, 245, 238, 0)");
-    ctx.fillStyle = radialBg;
+    // 氛围光晕 (柔和发光微渐变)
+    const halo1 = ctx.createRadialGradient(w * 0.25, 200, 10, w * 0.25, 200, 360);
+    halo1.addColorStop(0, "rgba(222, 175, 86, 0.16)");
+    halo1.addColorStop(1, "rgba(246, 242, 234, 0)");
+    ctx.fillStyle = halo1;
     ctx.fillRect(0, 0, w, h);
 
-    const radialBg2 = ctx.createRadialGradient(w * 0.8, h * 0.45, 30, w * 0.8, h * 0.45, 420);
-    radialBg2.addColorStop(0, "rgba(123, 174, 127, 0.14)");
-    radialBg2.addColorStop(1, "rgba(248, 245, 238, 0)");
-    ctx.fillStyle = radialBg2;
+    const halo2 = ctx.createRadialGradient(w * 0.75, 600, 10, w * 0.75, 600, 380);
+    halo2.addColorStop(0, "rgba(123, 174, 127, 0.15)");
+    halo2.addColorStop(1, "rgba(246, 242, 234, 0)");
+    ctx.fillStyle = halo2;
     ctx.fillRect(0, 0, w, h);
 
-    const radialBg3 = ctx.createRadialGradient(w * 0.3, h * 0.85, 20, w * 0.3, h * 0.85, 400);
-    radialBg3.addColorStop(0, "rgba(110, 114, 183, 0.1)");
-    radialBg3.addColorStop(1, "rgba(248, 245, 238, 0)");
-    ctx.fillStyle = radialBg3;
-    ctx.fillRect(0, 0, w, h);
-
-    // 绘制精致的外边框修饰
-    ctx.strokeStyle = "rgba(180, 165, 145, 0.35)";
+    // 雅致内框线条
+    ctx.strokeStyle = "rgba(170, 155, 135, 0.35)";
     ctx.lineWidth = 1.5;
-    ctx.strokeRect(36, 36, w - 72, h - 72);
+    ctx.strokeRect(30, 30, w - 60, h - 60);
 
-    // 2. 顶部品牌与标题区
+    // 2. 顶部品牌徽标 (极简高级感)
     ctx.textAlign = "center";
-    ctx.fillStyle = "#8C8275";
-    ctx.font = "500 18px -apple-system, BlinkMacSystemFont, sans-serif";
-    ctx.letterSpacing = "4px";
-    ctx.fillText("— CHAKRA ENERGY INNER RADAR —", w / 2, 86);
+    ctx.fillStyle = "#8E8375";
+    ctx.font = "600 14px -apple-system, sans-serif";
+    ctx.letterSpacing = "5px";
+    ctx.fillText("— INNER ENERGY RADAR · 脉轮能量报告 —", w / 2, 75);
 
-    ctx.fillStyle = "#2D2824";
-    ctx.font = "600 32px 'Noto Serif SC', serif, -apple-system, sans-serif";
-    ctx.fillText("内在能量觉察 · 脉轮自测报告", w / 2, 134);
+    // 3. 核心大字号人格/卡点标签 (视觉第一焦点，字号加大到 38px！)
+    ctx.fillStyle = "#221D1A";
+    ctx.font = "700 38px 'Noto Serif SC', -apple-system, sans-serif";
+    ctx.letterSpacing = "1px";
+    ctx.fillText(data.persona.title, w / 2, 132);
 
-    // 3. 用户人格标签卡片 (圆角矩形)
-    this.drawRoundedRect(ctx, 60, 168, w - 120, 150, 20, "rgba(255, 255, 255, 0.85)", "rgba(200, 184, 166, 0.4)");
+    // 扎心副标金句 (字号 18px，突出展示)
+    ctx.fillStyle = "#70665A";
+    ctx.font = "italic 500 18px -apple-system, sans-serif";
+    ctx.fillText(data.persona.tagline, w / 2, 172);
 
-    ctx.fillStyle = "#9A7426";
-    ctx.font = "600 18px -apple-system, sans-serif";
-    ctx.fillText(data.persona.title, w / 2, 212);
-
-    ctx.fillStyle = "#7A7268";
-    ctx.font = "400 16px -apple-system, sans-serif";
-    ctx.fillText(data.persona.subtitle, w / 2, 242);
-
-    ctx.fillStyle = "#4A423A";
-    ctx.font = "italic 16px -apple-system, sans-serif";
-    ctx.fillText(data.persona.tagline, w / 2, 284);
-
-    // 4. 中间绘制雷达图
+    // 4. 中间：巨大雷达图 (尺寸放大到 490px，居中极具张力)
     if (data.radarImage) {
-      const radarSize = 420;
+      const radarSize = 490;
       const rx = (w - radarSize) / 2;
-      const ry = 345;
+      const ry = 195;
       ctx.drawImage(data.radarImage, rx, ry, radarSize, radarSize);
     }
 
-    // 5. 核心卡点与处方卡片
-    this.drawRoundedRect(ctx, 60, 785, w - 120, 310, 20, "rgba(255, 255, 255, 0.9)", "rgba(216, 122, 104, 0.3)");
+    // 5. 雷达图下方：核心双指标对比药丸徽章 (醒目色块)
+    const lowest = data.lowestChakra;
+    const highest = data.highestChakra;
+    const lowestScore = data.chakraScores[lowest.id] || 35;
+    const highestScore = data.chakraScores[highest.id] || 85;
+
+    // 左胶囊：严重受阻 (警示色)
+    this.drawPillBadge(
+      ctx,
+      70, 695, 290, 50,
+      "rgba(216, 122, 104, 0.15)",
+      "#D87A68",
+      `⚠️ 最需疏通: ${lowest.name} (${lowestScore}%)`
+    );
+
+    // 右胶囊：天赋优势 (生机色)
+    this.drawPillBadge(
+      ctx,
+      390, 695, 290, 50,
+      "rgba(123, 174, 127, 0.15)",
+      "#5A8B5F",
+      `✦ 天赋优势: ${highest.name} (${highestScore}%)`
+    );
+
+    // 6. 底部精炼痛点卡片 (白色毛玻璃底，字大清晰，绝不拥挤)
+    this.drawRoundedRect(ctx, 60, 765, w - 120, 140, 16, "rgba(255, 255, 255, 0.88)", "rgba(200, 185, 170, 0.4)");
 
     ctx.textAlign = "left";
-    // 警示标
+    // 卡点行
     ctx.fillStyle = "#B55442";
-    ctx.font = "600 18px -apple-system, sans-serif";
-    ctx.fillText("⚠️ 关键能量卡点提示", 90, 826);
+    ctx.font = "600 17px -apple-system, sans-serif";
+    ctx.fillText("● 核心能量卡点：", 85, 805);
 
-    ctx.fillStyle = "#3D3630";
-    ctx.font = "400 15px -apple-system, sans-serif";
-    this.wrapText(ctx, data.persona.coreBottleneck, 90, 860, w - 180, 24);
+    ctx.fillStyle = "#2D2621";
+    ctx.font = "500 16px -apple-system, sans-serif";
+    this.wrapText(ctx, data.persona.coreBottleneck, 215, 805, 440, 24, 2);
 
-    // 处方
+    // 处方行
     ctx.fillStyle = "#4F8354";
-    ctx.font = "600 18px -apple-system, sans-serif";
-    ctx.fillText("🌿 专属能量调频建议", 90, 955);
+    ctx.font = "600 17px -apple-system, sans-serif";
+    ctx.fillText("● 专属调频建议：", 85, 868);
 
-    ctx.fillStyle = "#3D3630";
-    ctx.font = "400 15px -apple-system, sans-serif";
-    this.wrapText(ctx, data.persona.energyPrescription, 90, 990, w - 180, 24);
+    ctx.fillStyle = "#2D2621";
+    ctx.font = "500 16px -apple-system, sans-serif";
+    const rxSummary = `${lowest.frequency.split(' ')[0]} 音频共振 · ${lowest.crystal.split(' ')[0]} · ${lowest.affirmation}`;
+    this.wrapText(ctx, rxSummary, 215, 868, 440, 24, 2);
 
-    // 每日肯定语
-    if (data.lowestChakra) {
-      ctx.fillStyle = "#7A7268";
-      ctx.font = "italic 14px -apple-system, sans-serif";
-      ctx.fillText(`“ ${data.lowestChakra.affirmation} ”`, 90, 1065);
-    }
-
-    // 6. 底部小红书专属打卡水印与提示
+    // 7. 底部小红书专属打卡水印
     ctx.textAlign = "center";
-    ctx.fillStyle = "#9E9486";
-    ctx.font = "400 14px -apple-system, sans-serif";
-    ctx.fillText("小红书 @内在脉轮探索 · 一起看见身体真实的需要", w / 2, 1140);
+    ctx.fillStyle = "#9C9182";
+    ctx.font = "500 14px -apple-system, sans-serif";
+    ctx.fillText("小红书 @内在脉轮探索 · 长按保存测测你的脉轮", w / 2, 946);
 
-    ctx.fillStyle = "#B8ADA0";
-    ctx.font = "400 12px -apple-system, sans-serif";
-    ctx.fillText("长按保存图片 · 分享到小红书参与脉轮疗愈打卡", w / 2, 1170);
-
-    // 7. 返回 base64 图片格式
     return this.canvas.toDataURL("image/png");
+  }
+
+  // 绘制药丸胶囊徽章
+  drawPillBadge(ctx, x, y, width, height, bgColor, textColor, text) {
+    this.drawRoundedRect(ctx, x, y, width, height, height / 2, bgColor, null);
+    ctx.textAlign = "center";
+    ctx.fillStyle = textColor;
+    ctx.font = "600 15px -apple-system, sans-serif";
+    ctx.fillText(text, x + width / 2, y + height / 2 + 5);
   }
 
   drawRoundedRect(ctx, x, y, width, height, radius, fill, stroke) {
@@ -151,18 +158,23 @@ class ChakraPosterGenerator {
     }
   }
 
-  wrapText(ctx, text, x, y, maxWidth, lineHeight) {
-    const words = text.split("");
+  wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 2) {
+    const chars = text.split("");
     let line = "";
     let currentY = y;
+    let linesDrawn = 0;
 
-    for (let n = 0; n < words.length; n++) {
-      const testLine = line + words[n];
+    for (let n = 0; n < chars.length; n++) {
+      const testLine = line + chars[n];
       const metrics = ctx.measureText(testLine);
-      const testWidth = metrics.width;
-      if (testWidth > maxWidth && n > 0) {
+      if (metrics.width > maxWidth && n > 0) {
+        linesDrawn++;
+        if (linesDrawn >= maxLines) {
+          ctx.fillText(line + "...", x, currentY);
+          return;
+        }
         ctx.fillText(line, x, currentY);
-        line = words[n];
+        line = chars[n];
         currentY += lineHeight;
       } else {
         line = testLine;

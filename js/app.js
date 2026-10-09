@@ -271,14 +271,14 @@ document.addEventListener("DOMContentLoaded", () => {
           data: dataValues,
           backgroundColor: "rgba(123, 174, 127, 0.28)", // 鼠尾草玉绿半透明
           borderColor: "#5A8B5F",
-          borderWidth: 2,
+          borderWidth: 2.5,
           pointBackgroundColor: [
             "#D87A68", "#E08A56", "#DEAF56", "#7BAE7F", "#6B9AC4", "#6E72B7", "#9E7CB8"
           ],
           pointBorderColor: "#FAF5EE",
           pointBorderWidth: 2,
-          pointRadius: 4.5,
-          pointHoverRadius: 6
+          pointRadius: 5.5,
+          pointHoverRadius: 7
         }]
       },
       options: {
@@ -287,20 +287,20 @@ document.addEventListener("DOMContentLoaded", () => {
         scales: {
           r: {
             angleLines: {
-              color: "rgba(180, 165, 145, 0.35)",
-              lineWidth: 1
+              color: "rgba(180, 165, 145, 0.45)",
+              lineWidth: 1.2
             },
             grid: {
-              color: "rgba(180, 165, 145, 0.25)",
-              lineWidth: 1
+              color: "rgba(180, 165, 145, 0.35)",
+              lineWidth: 1.2
             },
             pointLabels: {
               font: {
-                size: 12,
+                size: 14,
                 family: "-apple-system, sans-serif",
-                weight: "500"
+                weight: "600"
               },
-              color: "#5C5349"
+              color: "#3A3228"
             },
             ticks: {
               display: false,
