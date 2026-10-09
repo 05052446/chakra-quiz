@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CHAKRA · 7大脉轮内在能量觉察自测</title>
+  <!-- Chart.js 现代图表库 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- 顶部极简品牌标识 -->
+    <header class="app-header">
+      <div class="brand-badge">
+        <span class="brand-dot"></span>
+        <span>Inner Resonance · 脉轮觉察</span>
+      </div>
+      <div style="font-size: 12px; color: var(--text-light); letter-spacing: 0.5px;">Wabi-Sabi Flow</div>
+    </header>
+
+    <!-- ========================================================
+         视图 1: 封面引导页 (Welcome)
+         ======================================================== -->
+    <section id="view-welcome" class="view-section active">
+      <div class="glass-card hero-card">
+        <!-- 动态能量光轮视觉 -->
+        <div class="chakra-wheel-visual">
+          <div class="wheel-circle-outer"></div>
+          <div class="wheel-core"></div>
+          <div class="wheel-icon-center">✦</div>
+        </div>
+
+        <h1 class="hero-title">7大脉轮能量平衡测试</h1>
+        <p class="hero-subtitle">
+          看见深层身体记忆中的疲惫与受阻，<br>
+          3 分钟校准内在七大生命能量中心。
+        </p>
+
+        <div class="social-proof-bar">
+          <div class="avatar-stack">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span>已有 <strong>18,920+</strong> 位小红书伙伴完成自测</span>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-pill">
+            <span class="icon">🌿</span>
+            <span class="text">21维生活场景</span>
+          </div>
+          <div class="feature-pill">
+            <span class="icon">🕸️</span>
+            <span class="text">7维动态雷达</span>
+          </div>
+          <div class="feature-pill">
+            <span class="icon">✨</span>
+            <span class="text">高颜值打卡海报</span>
+          </div>
+        </div>
+
+        <button id="btn-start" class="btn-primary">
+          <span>开始探索内在能量 (约2分钟)</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         视图 2: 答题流程卡片 (Quiz)
+         ======================================================== -->
+    <section id="view-quiz" class="view-section">
+      <div class="quiz-header">
+        <div class="progress-info">
+          <span>觉察进度</span>
+          <span><strong id="q-num-current">1</strong> / 21</span>
+        </div>
+        <div class="progress-track">
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+      </div>
+
+      <div class="glass-card question-card">
+        <div>
+          <div id="q-chakra-badge" class="chakra-category-tag">
+            <!-- 动态注入脉轮类别 -->
+          </div>
+          <h2 id="q-title" class="question-title">
+            <!-- 动态注入题目描述 -->
+          </h2>
+        </div>
+
+        <!-- 5 级量表选项 -->
+        <div id="options-stack" class="options-stack">
+          <!-- 动态注入选项按钮 -->
+        </div>
+
+        <div class="quiz-footer-nav">
+          <button id="btn-prev" class="btn-ghost">
+            ← 返回上一题
+          </button>
+          <span style="font-size: 11px; color: var(--text-light); align-self: center;">
+            依第一直觉选择最贴合感受
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         视图 3: 能量分析过渡 (Analyzing)
+         ======================================================== -->
+    <section id="view-analyzing" class="view-section">
+      <div class="glass-card analyzing-card">
+        <div class="breathing-portal">
+          <div class="portal-ring"></div>
+          <div class="portal-ring"></div>
+          <div class="portal-ring"></div>
+          <div class="portal-center-energy"></div>
+        </div>
+
+        <h3 style="font-size: 18px; font-weight: 500; color: var(--text-main); margin-bottom: 8px;">
+          正在感知生命能量流动...
+        </h3>
+        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+          校准七大神经能量丛与深层情绪频率<br>
+          为您生成专属内在平衡雷达
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         视图 4: 测评结果报告 (Result)
+         ======================================================== -->
+    <section id="view-result" class="view-section">
+      
+      <!-- 人格主型卡片 -->
+      <div class="glass-card result-persona-banner">
+        <span id="res-persona-tag" class="persona-tag">核心能量画像</span>
+        <h2 id="res-persona-title" class="persona-title">--</h2>
+        <div id="res-persona-subtitle" class="persona-subtitle">--</div>
+        <div id="res-persona-quote" class="persona-quote">
+          “--”
+        </div>
+      </div>
+
+      <!-- 7 维雷达图卡片 -->
+      <div class="glass-card radar-container-card">
+        <div class="section-label">
+          <span>✦</span>
+          <span>7大脉轮能量分布雷达</span>
+          <span>✦</span>
+        </div>
+        <div class="section-desc">外圈代表能量通畅饱满，内圈代表能量受限阻滞</div>
+        <div class="radar-chart-box">
+          <canvas id="chakraRadarChart"></canvas>
+        </div>
+      </div>
+
+      <!-- 关键卡点预警卡片 -->
+      <div class="glass-card bottleneck-alert-card">
+        <div class="alert-title">
+          <span>⚠️</span>
+          <span>核心卡点诊断</span>
+        </div>
+        <p id="res-bottleneck-desc" class="alert-text">--</p>
+      </div>
+
+      <!-- 变现与小红书店铺引流卡片 (核心变现入口) -->
+      <div class="monetization-card">
+        <span class="product-tag">小红书专属自愈好物</span>
+        <h3 class="monetize-title">《7天脉轮频率音频 + 身心自愈指南》</h3>
+        <p class="monetize-desc">
+          针对您当前的能量卡点，精选 7 组特定赫兹音疗（396Hz~963Hz）与温润冥想引导词，每天 10 分钟平复深层内耗。
+        </p>
+        
+        <div class="audio-preview-list">
+          <div>🎧 <strong>内含音频：</strong>7大脉轮特定双耳节拍 + 颂钵疗愈音</div>
+          <div>📖 <strong>电子手册：</strong>莫兰迪色系 Goodnotes 脉轮能量手账日记</div>
+          <div>💰 <strong>限时特惠：</strong>¥19.9 <span style="text-decoration: line-through; color:#A89E90;">原价 ¥69</span></div>
+        </div>
+
+        <button id="btn-monetize-action" class="btn-primary" style="background: linear-gradient(135deg, #DEAF56, #C59842); color:#FFF; box-shadow: 0 8px 20px -4px rgba(222, 175, 86, 0.4);">
+          <span>获取完整 7 天音频与自愈包</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- 脉轮详细分析手风琴列表 -->
+      <div class="section-label" style="margin-bottom: 12px; justify-content: flex-start; padding-left: 4px;">
+        <span>🌿</span>
+        <span>七大脉轮健康状态明细</span>
+      </div>
+      <div id="chakra-accordion" class="chakra-details-accordion">
+        <!-- 动态注入 7 大脉轮卡片 -->
+      </div>
+
+      <!-- 裂变与操作按钮组 -->
+      <div class="action-buttons-group">
+        <button id="btn-generate-poster" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>保存并生成小红书打卡长图</span>
+        </button>
+
+        <button id="btn-retake" class="btn-secondary">
+          <span>重新测试</span>
+        </button>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- ========================================================
+       海报预览弹窗 (Modal)
+       ======================================================== -->
+  <div id="poster-modal" class="modal-overlay">
+    <div class="modal-box">
+      <h4 style="font-size: 16px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;">
+        您的专属小红书打卡海报
+      </h4>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+        长按图片可直接保存至手机相册，或截图分享
+      </p>
+
+      <img id="poster-modal-img" class="poster-preview-img" alt="脉轮测试海报">
+
+      <button id="btn-close-modal" class="btn-primary" style="margin-top: 10px; padding: 12px 20px;">
+        <span>完成并关闭</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       小红书店铺引流弹窗 (Shop Modal)
+       ======================================================== -->
+  <div id="shop-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div style="font-size: 32px; margin-bottom: 8px;">🧘‍♀️</div>
+      <h4 style="font-size: 18px; font-weight: 600; color: var(--text-main); margin-bottom: 6px;">
+        《7天脉轮身心自愈包》
+      </h4>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">
+        支持自动发货至百度网盘 / 夸克网盘<br>
+        拍下后立即可用，手机 iPad 随听随看
+      </p>
+
+      <!-- 模拟店铺二维码或淘口令/群聊入口 -->
+      <div style="background: var(--bg-card-subtle); padding: 16px; border-radius: var(--radius-md); margin-bottom: 16px; border: 1px dashed var(--border-active);">
+        <div style="font-size: 13px; font-weight: 600; color: #9A7426; margin-bottom: 6px;">
+          ✦ 小红书店铺购买通道 ✦
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+          打开小红书搜索 <strong>“内在脉轮探索”</strong> 进入店铺，或在小红书笔记评论区回复 <strong>“自愈包”</strong> 获取专属粉丝优惠券。
+        </p>
+      </div>
+
+      <button id="btn-close-shop" class="btn-secondary" style="width: 100%;">
+        <span>我知道了</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 脚本引入 -->
+  <script src="js/questions.js"></script>
+  <script src="js/poster.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
